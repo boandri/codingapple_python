@@ -1,6 +1,6 @@
 class I:
-    def __init__(my, name):
-        my.name = name
+    def __init__(self, name):
+        self.name = name
 
 class My(I):
     Degree, Skills, Languages, Strength = {}, [], (), []
