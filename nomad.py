@@ -1,30 +1,28 @@
-player = {
-    'Name': 'Thomas',
-    'Age': 27,
-    'alive': True,
-    'fav_person': 'Seo Woo'
-}
-player.pop('fav_person')
-print(player)
-
-player['alive'] = True
-print(player)
-
-player['fav_things'] = ['Seo Woo', 'Volley ball', 'Board games']
-print(player)
-
-player['fav_things'].append('Love')
-print(player)
-
+import requests
 
 websites = (
     'google.com',
     'https://airbnb.com',
     'https://twitter.com',
-    'facebook.com'
+    'tatoo.com',
+    'facebook.com',
+    'clare.com'
 )
 
+results = {}
+
 for website in websites:
-    if not website.startswith('https://'):
-        website = "https://"+website
-    print(website)
+  if not website.startswith('https://'):
+    website = "https://" + website
+  response = requests.get(website)
+  if response.status_code >= 100 and response.status_code < 200:
+    results[website] = 'Informational'
+  elif response.status_code >= 200 and response.status_code < 300:
+    results[website] = 'Success'
+  elif response.status_code >= 300 and response.status_code < 400:
+    results[website] = 'Redirection'
+  elif response.status_code >= 400 and response.status_code < 500:
+    results[website] = 'Client error'
+  else:
+    results[website] = 'Server error'
+print(results)  
